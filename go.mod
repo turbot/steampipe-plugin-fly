@@ -5,7 +5,6 @@ go 1.19
 require (
 	github.com/Khan/genqlient v0.5.0
 	github.com/fly-apps/terraform-provider-fly v0.0.20
-	github.com/pkg/errors v0.9.1
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.0.2
 )
 
@@ -64,6 +63,7 @@ require (
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/pegasus-kv/thrift v0.13.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.12.2 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.33.0 // indirect

@@ -22,7 +22,7 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*apiClient.Client, err
 		return nil, fmt.Errorf("token must be passed")
 	}
 
-	// Start with an empty Turbot config
+	// Start with an empty Fly config
 	config := apiClient.ClientConfig{Token: flyConfig.Token}
 
 	// Create the client

@@ -8,18 +8,17 @@ import (
 )
 
 type ListAppsRequestConfiguration struct {
-	Limit     int
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned EndCursor value.
+	Limit int
+
+	// When paginating forwards, the cursor to continue.
 	EndCursor string
 }
 
 // ListAppsResponse is returned by ListApps on success.
 type ListAppsResponse struct {
 	Apps Apps `json:"apps"`
-}
-
-type PageInfo struct {
-	HasNextPage bool   `json:"hasNextPage"`
-	EndCursor   string `json:"endCursor"`
 }
 
 type Apps struct {
@@ -33,11 +32,13 @@ type __GetFullAppInput struct {
 	Name string `json:"name"`
 }
 
+// __ListAppsInput is used internally by genqlient
 type __ListAppsInput struct {
 	First int    `json:"first"`
 	After string `json:"after"`
 }
 
+// Define the query
 const (
 	queryAppList = `
 query ListApps($first: Int, $after: String) {
@@ -139,7 +140,7 @@ query GetFullApp ($name: String) {
 `
 )
 
-// List apps
+// ListApps returns all the fly apps resource
 func ListApps(
 	ctx context.Context,
 	client graphql.Client,
@@ -175,7 +176,7 @@ func ListApps(
 	return &data, err
 }
 
-// Get app
+// GetFullApp returns the specified the fly app resource
 func GetFullApp(
 	ctx context.Context,
 	client graphql.Client,

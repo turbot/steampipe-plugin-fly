@@ -9,6 +9,8 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
+//// TABLE DEFINITION
+
 func tableFlyApp(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "fly_app",
@@ -91,6 +93,8 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 	}
 }
 
+//// LIST FUNCTION
+
 func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := getClient(ctx, d)
 	if err != nil {
@@ -140,6 +144,8 @@ func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 
 	return nil, nil
 }
+
+//// HYDRATE FUNCTIONS
 
 func getFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")

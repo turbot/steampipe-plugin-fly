@@ -10,7 +10,7 @@ import (
 	"github.com/Khan/genqlient/graphql"
 )
 
-// Turbot API Client
+// Fly API Client
 type Client struct {
 	Token   *string
 	Graphql graphql.Client
