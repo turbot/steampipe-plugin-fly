@@ -40,8 +40,8 @@ type __ListAppsInput struct {
 
 const (
 	queryAppList = `
-query ListApps($first: Int) {
-	apps(first: $first) {
+query ListApps($first: Int, $after: String) {
+	apps(first: $first, after: $after) {
 		pageInfo {
       hasNextPage
 			endCursor
