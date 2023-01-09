@@ -42,100 +42,100 @@ type __ListAppsInput struct {
 const (
 	queryAppList = `
 query ListApps($first: Int, $after: String) {
-	apps(first: $first, after: $after) {
-		pageInfo {
+  apps(first: $first, after: $after) {
+    pageInfo {
       hasNextPage
-			endCursor
+      endCursor
     }
     totalCount
-		nodes {
-			name
-			network
-			organization {
-				id
-				slug
-			}
-			autoscaling {
-				preferredRegion
-				regions {
-					code
-				}
-			}
-			appUrl
-			hostname
-			id
-			status
-			deployed
-			currentRelease {
-				id
-			}
-			config {
-				definition
-			}
-			healthChecks {
-				nodes {
-					name
-					status
-				}
-			}
-			ipAddresses {
-				nodes {
-					address
-					id
-				}
-			}
-			role {
-				__typename
-				name
-			}
-		}
-	}
+    nodes {
+      name
+      network
+      organization {
+        id
+        slug
+      }
+      autoscaling {
+        preferredRegion
+        regions {
+          code
+        }
+      }
+      appUrl
+      hostname
+      id
+      status
+      deployed
+      currentRelease {
+        id
+      }
+      config {
+        definition
+      }
+      healthChecks {
+        nodes {
+          name
+          status
+        }
+      }
+      ipAddresses {
+        nodes {
+          address
+          id
+        }
+      }
+      role {
+        __typename
+        name
+      }
+    }
+  }
 }
 `
 
 	queryAppGet = `
 query GetFullApp ($name: String) {
-	app(name: $name) {
-		name
-		network
-		organization {
-			id
-			slug
-		}
-		autoscaling {
-			preferredRegion
-			regions {
-				code
-			}
-		}
-		appUrl
-		hostname
-		id
-		status
-		deployed
-		currentRelease {
-			id
-		}
-		config {
-			definition
-		}
-		healthChecks {
-			nodes {
-				name
-				status
-			}
-		}
-		ipAddresses {
-			nodes {
-				address
-				id
-			}
-		}
-		role {
-			__typename
-			name
-		}
-	}
+  app(name: $name) {
+    name
+    network
+    organization {
+      id
+      slug
+    }
+    autoscaling {
+      preferredRegion
+      regions {
+        code
+      }
+    }
+    appUrl
+    hostname
+    id
+    status
+    deployed
+    currentRelease {
+      id
+    }
+    config {
+      definition
+    }
+    healthChecks {
+      nodes {
+        name
+        status
+      }
+    }
+    ipAddresses {
+      nodes {
+        address
+        id
+      }
+    }
+    role {
+      __typename
+      name
+    }
+  }
 }
 `
 )
