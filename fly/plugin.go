@@ -24,6 +24,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"fly_app":          tableFlyApp(ctx),
 			"fly_machine":      tableFlyMachine(ctx),
 			"fly_organization": tableFlyOrganization(ctx),
+			"fly_volume":       tableFlyVolume(ctx),
 		},
 	}
 	return p

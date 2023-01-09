@@ -14,7 +14,7 @@ type Machine struct {
 	CreatedAt  string               `json:"createdAt"`
 	UpdatedAt  string               `json:"updatedAt"`
 	InstanceID string               `json:"instanceId"`
-	Host       MachineHost          `json:"host"`
+	Host       Host                 `json:"host"`
 	Config     MachineConfiguration `json:"config"`
 }
 
@@ -25,7 +25,7 @@ type Mount struct {
 	Encrypted bool   `json:"encrypted"`
 }
 
-type MachineHost struct {
+type Host struct {
 	ID string `json:"id"`
 }
 

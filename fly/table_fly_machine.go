@@ -162,7 +162,7 @@ func getFlyMachine(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 
 	query, err := apiClient.GetMachine(context.Background(), conn.Graphql, machineID)
 	if err != nil {
-		plugin.Logger(ctx).Error("fly_organization.getFlyOrganization", "query_error", err)
+		plugin.Logger(ctx).Error("fly_machine.getFlyMachine", "query_error", err)
 		return nil, err
 	}
 
