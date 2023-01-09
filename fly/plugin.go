@@ -22,6 +22,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		DefaultTransform: transform.FromCamel().Transform(transform.NullIfZeroValue),
 		TableMap: map[string]*plugin.Table{
 			"fly_app":          tableFlyApp(ctx),
+			"fly_machine":      tableFlyMachine(ctx),
 			"fly_organization": tableFlyOrganization(ctx),
 		},
 	}
