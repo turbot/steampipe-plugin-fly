@@ -64,9 +64,9 @@ type __ListOrgMembersInput struct {
 // Define the query
 const (
 	queryOrgMemberList = `
-query ListOrganizationMembers($orgID: ID) {
+query ListOrganizationMembers($orgID: ID, $first: Int, $after: String) {
   organization(id: $orgID) {
-    members {
+    members(first: $first, after: $after) {
       pageInfo {
         hasNextPage
         endCursor
