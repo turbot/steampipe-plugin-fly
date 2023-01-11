@@ -88,44 +88,44 @@ type __GetMachineInput struct {
 const (
 	queryMachineList = `
 query ListMachines($first: Int, $after: String, $appId: String, $state: String) {
-	machines(first: $first, after: $after, appId: $appId, state: $state) {
-		pageInfo {
-			endCursor
-			hasNextPage
-		}
-		totalCount
-		nodes {
-			name
-			id
-			state
-			createdAt
-			updatedAt
-			instanceId
-			host {
-				id
-			}
-			region
-			config
-		}
-	}
+  machines(first: $first, after: $after, appId: $appId, state: $state) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    totalCount
+    nodes {
+      name
+      id
+      state
+      createdAt
+      updatedAt
+      instanceId
+      host {
+        id
+      }
+      region
+      config
+    }
+  }
 }
 `
 
 	queryMachineGet = `
 query GetMachine($machineId: String!) {
-	machine(machineId: $machineId) {
-		name
-		id
-		state
-		createdAt
-		updatedAt
-		instanceId
-		host {
-			id
-		}
-		region
-		config
-	}
+  machine(machineId: $machineId) {
+    name
+    id
+    state
+    createdAt
+    updatedAt
+    instanceId
+    host {
+      id
+    }
+    region
+    config
+  }
 }
 `
 )

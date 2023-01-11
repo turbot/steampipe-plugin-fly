@@ -63,52 +63,52 @@ type __GetOrganizationInput struct {
 const (
 	queryOrganizationList = `
 query ListOrganizations($first: Int, $after: String) {
-	organizations(first: $first, after: $after) {
-		pageInfo {
-			hasNextPage
-			endCursor
-		}
-		totalCount
-		nodes {
-			name
-			id
-			slug
-			billingStatus
-			creditBalance
-			creditBalanceFormatted
-			sshCertificate
-			internalNumericId
-			isCreditCardSaved
-			activeDiscountName
-			type
-			viewerRole
-			remoteBuilderImage
-			addOnSsoLink
-			trust
-		}
-	}
+  organizations(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    totalCount
+    nodes {
+      name
+      id
+      slug
+      billingStatus
+      creditBalance
+      creditBalanceFormatted
+      sshCertificate
+      internalNumericId
+      isCreditCardSaved
+      activeDiscountName
+      type
+      viewerRole
+      remoteBuilderImage
+      addOnSsoLink
+      trust
+    }
+  }
 }
 `
 
 	queryOrganizationGet = `
 query GetOrganization($slug: String) {
-	organization(slug: $slug) {
-		name
-		id
-		slug
-		billingStatus
-		creditBalance
-		creditBalanceFormatted
-		sshCertificate
-		internalNumericId
-		isCreditCardSaved
-		activeDiscountName
-		type
-		viewerRole
-		remoteBuilderImage
-		addOnSsoLink
-		trust
-	}
+  organization(slug: $slug) {
+    name
+    id
+    slug
+    billingStatus
+    creditBalance
+    creditBalanceFormatted
+    sshCertificate
+    internalNumericId
+    isCreditCardSaved
+    activeDiscountName
+    type
+    viewerRole
+    remoteBuilderImage
+    addOnSsoLink
+    trust
+  }
 }
 `
 )

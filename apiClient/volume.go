@@ -71,14 +71,14 @@ type __GetVolumeInput struct {
 const (
 	queryVolumeList = `
 query ListVolumes($appId: String, $first: Int, $after: String) {
-	app(name: $appId) {
-		volumes(first: $first, after: $after) {
+  app(name: $appId) {
+    volumes(first: $first, after: $after) {
       pageInfo {
-				endCursor
-				hasNextPage
-			}
-			totalCount
-			nodes {
+        endCursor
+        hasNextPage
+      }
+      totalCount
+      nodes {
         name
         region
         id
@@ -95,38 +95,38 @@ query ListVolumes($appId: String, $first: Int, $after: String) {
         attachedMachine {
           id
         }
-				app {
-					id
-				}
+        app {
+          id
+        }
       }
     }
-	}
+  }
 }
 `
 
 	queryVolumeGet = `
 query GetVolume($id: ID!) {
-	volume(id: $id) {
-		name
-		region
-		id
-		state
-		sizeGb
-		status
-		createdAt
-		internalId
-		usedBytes
-		encrypted
-		host {
-			id
-		}
-		attachedMachine {
-			id
-		}
-		app {
-			id
-		}
-	}
+  volume(id: $id) {
+    name
+    region
+    id
+    state
+    sizeGb
+    status
+    createdAt
+    internalId
+    usedBytes
+    encrypted
+    host {
+      id
+    }
+    attachedMachine {
+      id
+    }
+    app {
+      id
+    }
+  }
 }
 `
 )
