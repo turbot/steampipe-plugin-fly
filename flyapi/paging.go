@@ -1,4 +1,4 @@
-package apiClient
+package flyapi
 
 type PageInfo struct {
 	// When paginating forwards, are there more items?

@@ -7,14 +7,14 @@ import (
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 )
 
-func getClient(ctx context.Context, d *plugin.QueryData) (*apiClient.Client, error) {
+func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error) {
 	// Load connection from cache, which preserves throttling protection etc
 	cacheKey := "fly"
 	if cachedData, ok := d.ConnectionManager.Cache.Get(cacheKey); ok {
-		return cachedData.(*apiClient.Client), nil
+		return cachedData.(*flyapi.Client), nil
 	}
 
 	// Get the config
@@ -38,10 +38,10 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*apiClient.Client, err
 	}
 
 	// Start with an empty Fly config
-	config := apiClient.ClientConfig{FlyApiToken: flyConfig.FlyApiToken}
+	config := flyapi.ClientConfig{FlyApiToken: flyConfig.FlyApiToken}
 
 	// Create the client
-	client, err := apiClient.CreateClient(ctx, config)
+	client, err := flyapi.CreateClient(ctx, config)
 	if err != nil {
 		return nil, fmt.Errorf("error creating client: %s", err.Error())
 	}

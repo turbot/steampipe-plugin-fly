@@ -3,7 +3,7 @@ package fly
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -111,7 +111,7 @@ func listFlyVolumes(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 		return nil, err
 	}
 
-	options := &apiClient.ListVolumesRequestConfiguration{
+	options := &flyapi.ListVolumesRequestConfiguration{
 		AppId: appID,
 	}
 
@@ -129,7 +129,7 @@ func listFlyVolumes(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	options.Limit = pageLimit
 
 	for {
-		query, err := apiClient.ListVolumes(context.Background(), conn.Graphql, options)
+		query, err := flyapi.ListVolumes(context.Background(), conn.Graphql, options)
 		if err != nil {
 			plugin.Logger(ctx).Error("fly_volume.listFlyVolumes", "query_error", err)
 			return nil, err
@@ -170,7 +170,7 @@ func getFlyVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 		return nil, err
 	}
 
-	query, err := apiClient.GetVolume(context.Background(), conn.Graphql, volumeID)
+	query, err := flyapi.GetVolume(context.Background(), conn.Graphql, volumeID)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_volume.getFlyVolume", "query_error", err)
 		return nil, err

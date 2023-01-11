@@ -3,7 +3,7 @@ package fly
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 
@@ -126,7 +126,7 @@ func listFlyAppCertificates(ctx context.Context, d *plugin.QueryData, h *plugin.
 		return nil, err
 	}
 
-	options := &apiClient.ListAppCertificatesRequestConfiguration{
+	options := &flyapi.ListAppCertificatesRequestConfiguration{
 		AppId: appID,
 	}
 
@@ -144,7 +144,7 @@ func listFlyAppCertificates(ctx context.Context, d *plugin.QueryData, h *plugin.
 	options.Limit = pageLimit
 
 	for {
-		query, err := apiClient.ListAppCertificates(context.Background(), conn.Graphql, options)
+		query, err := flyapi.ListAppCertificates(context.Background(), conn.Graphql, options)
 		if err != nil {
 			plugin.Logger(ctx).Error("fly_app_certificate.listFlyAppCertificates", "query_error", err)
 			return nil, err
@@ -186,7 +186,7 @@ func getFlyAppCertificate(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		return nil, err
 	}
 
-	query, err := apiClient.GetAppCertificate(context.Background(), conn.Graphql, certID)
+	query, err := flyapi.GetAppCertificate(context.Background(), conn.Graphql, certID)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_app_certificate.getFlyAppCertificate", "query_error", err)
 		return nil, err

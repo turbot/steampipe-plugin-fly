@@ -1,4 +1,4 @@
-package apiClient
+package flyapi
 
 type ClientConfig struct {
 	FlyApiToken *string

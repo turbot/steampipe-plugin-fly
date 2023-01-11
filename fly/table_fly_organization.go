@@ -3,7 +3,7 @@ package fly
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -115,7 +115,7 @@ func listFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 		return nil, err
 	}
 
-	options := &apiClient.ListOrganizationsRequestConfiguration{}
+	options := &flyapi.ListOrganizationsRequestConfiguration{}
 
 	// There is no max page limit as such defined
 	// but, we set the default page limit as 5000
@@ -131,7 +131,7 @@ func listFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 	options.Limit = pageLimit
 
 	for {
-		query, err := apiClient.ListOrganizations(context.Background(), conn.Graphql, options)
+		query, err := flyapi.ListOrganizations(context.Background(), conn.Graphql, options)
 		if err != nil {
 			plugin.Logger(ctx).Error("fly_organization.listFlyOrganization", "query_error", err)
 			return nil, err
@@ -172,7 +172,7 @@ func getFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 		return nil, err
 	}
 
-	query, err := apiClient.GetOrganization(context.Background(), conn.Graphql, slug)
+	query, err := flyapi.GetOrganization(context.Background(), conn.Graphql, slug)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_organization.getFlyOrganization", "query_error", err)
 		return nil, err

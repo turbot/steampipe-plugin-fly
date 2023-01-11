@@ -1,4 +1,4 @@
-package apiClient
+package flyapi
 
 import (
 	"context"

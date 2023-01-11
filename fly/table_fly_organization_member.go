@@ -3,7 +3,7 @@ package fly
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -104,7 +104,7 @@ func tableFlyOrganizationMember(ctx context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listFlyOrganizationMembers(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
-	orgData := h.Item.(apiClient.Organization)
+	orgData := h.Item.(flyapi.Organization)
 	orgID := orgData.ID
 
 	conn, err := getClient(ctx, d)
@@ -113,7 +113,7 @@ func listFlyOrganizationMembers(ctx context.Context, d *plugin.QueryData, h *plu
 		return nil, err
 	}
 
-	options := &apiClient.ListOrgMembersRequestConfiguration{
+	options := &flyapi.ListOrgMembersRequestConfiguration{
 		OrgId: orgID,
 	}
 
@@ -131,7 +131,7 @@ func listFlyOrganizationMembers(ctx context.Context, d *plugin.QueryData, h *plu
 	options.Limit = pageLimit
 
 	for {
-		query, err := apiClient.ListOrganizationMembers(context.Background(), conn.Graphql, options)
+		query, err := flyapi.ListOrganizationMembers(context.Background(), conn.Graphql, options)
 		if err != nil {
 			plugin.Logger(ctx).Error("fly_organization_member.listFlyOrganizationMembers", "query_error", err)
 			return nil, err

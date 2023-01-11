@@ -3,7 +3,7 @@ package fly
 import (
 	"context"
 
-	"github.com/turbot/steampipe-plugin-fly/apiClient"
+	"github.com/turbot/steampipe-plugin-fly/flyapi"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
@@ -102,7 +102,7 @@ func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 		return nil, err
 	}
 
-	options := &apiClient.ListAppsRequestConfiguration{}
+	options := &flyapi.ListAppsRequestConfiguration{}
 
 	// There is no max page limit as such defined
 	// but, we set the default page limit as 5000
@@ -118,7 +118,7 @@ func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	options.Limit = pageLimit
 
 	for {
-		query, err := apiClient.ListApps(context.Background(), conn.Graphql, options)
+		query, err := flyapi.ListApps(context.Background(), conn.Graphql, options)
 		if err != nil {
 			plugin.Logger(ctx).Error("fly_app.listFlyApp", "query_error", err)
 			return nil, err
@@ -159,7 +159,7 @@ func getFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 		return nil, err
 	}
 
-	query, err := apiClient.GetFullApp(context.Background(), conn.Graphql, name)
+	query, err := flyapi.GetFullApp(context.Background(), conn.Graphql, name)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_app.getFlyApp", "query_error", err)
 		return nil, err
