@@ -78,7 +78,7 @@ func tableFlyOrganization(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "active_discount_name",
-				Description: "",
+				Description: "Specifies the active discount name.",
 				Type:        proto.ColumnType_STRING,
 			},
 			{
@@ -99,7 +99,7 @@ func tableFlyOrganization(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "trust",
-				Description: "",
+				Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH.",
 				Type:        proto.ColumnType_STRING,
 			},
 		},

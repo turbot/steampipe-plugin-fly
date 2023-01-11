@@ -16,7 +16,7 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 		Name:        "fly_app",
 		Description: "Fly App",
 		List: &plugin.ListConfig{
-			Hydrate: listFlyApp,
+			Hydrate: listFlyApps,
 		},
 		Get: &plugin.GetConfig{
 			Hydrate:    getFlyApp,
@@ -35,7 +35,7 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "network",
-				Description: "",
+				Description: "Specifies the app network.",
 				Type:        proto.ColumnType_STRING,
 			},
 			{
@@ -95,10 +95,10 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 
 //// LIST FUNCTION
 
-func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listFlyApps(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := getClient(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("fly_app.listFlyApp", "connection_error", err)
+		plugin.Logger(ctx).Error("fly_app.listFlyApps", "connection_error", err)
 		return nil, err
 	}
 
@@ -120,7 +120,7 @@ func listFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	for {
 		query, err := flyapi.ListApps(context.Background(), conn.Graphql, options)
 		if err != nil {
-			plugin.Logger(ctx).Error("fly_app.listFlyApp", "query_error", err)
+			plugin.Logger(ctx).Error("fly_app.listFlyApps", "query_error", err)
 			return nil, err
 		}
 

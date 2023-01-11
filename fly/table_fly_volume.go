@@ -18,7 +18,7 @@ func tableFlyVolume(ctx context.Context) *plugin.Table {
 		Name:        "fly_volume",
 		Description: "Fly Volume",
 		List: &plugin.ListConfig{
-			ParentHydrate: listFlyApp,
+			ParentHydrate: listFlyApps,
 			Hydrate:       listFlyVolumes,
 		},
 		Get: &plugin.GetConfig{

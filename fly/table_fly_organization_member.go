@@ -75,13 +75,13 @@ func tableFlyOrganizationMember(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "has_node_proxy_apps",
-				Description: "",
+				Description: "True, if the member has node proxy app.",
 				Type:        proto.ColumnType_BOOL,
 				Transform:   transform.FromField("Member.HasNodeProxyApps"),
 			},
 			{
 				Name:        "trust",
-				Description: "",
+				Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH.",
 				Type:        proto.ColumnType_STRING,
 				Transform:   transform.FromField("Member.Trust"),
 			},

@@ -17,7 +17,7 @@ func tableFlyAppCertificate(ctx context.Context) *plugin.Table {
 		Name:        "fly_app_certificate",
 		Description: "Fly App Certificate",
 		List: &plugin.ListConfig{
-			ParentHydrate: listFlyApp,
+			ParentHydrate: listFlyApps,
 			Hydrate:       listFlyAppCertificates,
 		},
 		Get: &plugin.GetConfig{
@@ -87,27 +87,27 @@ func tableFlyAppCertificate(ctx context.Context) *plugin.Table {
 			},
 			{
 				Name:        "is_acme_alpn_configured",
-				Description: "",
+				Description: "If true, certificate acme-alpn is configured.",
 				Type:        proto.ColumnType_BOOL,
 			},
 			{
 				Name:        "is_acme_dns_configured",
-				Description: "",
+				Description: "If true, acme-dns is configured for domain validation.",
 				Type:        proto.ColumnType_BOOL,
 			},
 			{
 				Name:        "is_apex",
-				Description: "",
+				Description: "True, if the certificate is a apex certificate.",
 				Type:        proto.ColumnType_BOOL,
 			},
 			{
 				Name:        "is_configured",
-				Description: "",
+				Description: "If true, certificate is configured with valid DNS configuration.",
 				Type:        proto.ColumnType_BOOL,
 			},
 			{
 				Name:        "is_wildcard",
-				Description: "",
+				Description: "If true, the hostname of the certificate contains wildcard.",
 				Type:        proto.ColumnType_BOOL,
 			},
 		},
