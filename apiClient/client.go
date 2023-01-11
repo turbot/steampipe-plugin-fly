@@ -17,10 +17,10 @@ type Client struct {
 }
 
 func CreateClient(ctx context.Context, config ClientConfig) (*Client, error) {
-	h := http.Client{Timeout: 60 * time.Second, Transport: &utils.Transport{UnderlyingTransport: http.DefaultTransport, Token: *config.Token, Ctx: ctx}}
+	h := http.Client{Timeout: 60 * time.Second, Transport: &utils.Transport{UnderlyingTransport: http.DefaultTransport, Token: *config.FlyApiToken, Ctx: ctx}}
 
 	return &Client{
-		Token:   config.Token,
+		Token:   config.FlyApiToken,
 		Graphql: graphql.NewClient("https://api.fly.io/graphql", &h),
 	}, nil
 }

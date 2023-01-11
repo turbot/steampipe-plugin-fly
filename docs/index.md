@@ -53,9 +53,7 @@ steampipe plugin install fly
 
 ### Credentials
 
-The API token can be generated using the [CLI](https://fly.io/docs/flyctl/auth-token) to the Fly.io; or from the [organization dashboard](https://fly.io/dashboard) itself.
-
-To generate the API token from the [organization dashboard](https://fly.io/dashboard):
+All queries require an API token which be obtained by signing into the [Fly.io web dashboard](https://fly.io/dashboard):
 
 - Log into the [Fly.io](https://fly.io).
 - Go to the **Account** section in the top-right of the Console, and select **Access Tokens** from the drop-down.
@@ -69,8 +67,9 @@ Installing the latest fly plugin will create a config file (`~/.steampipe/config
 connection "fly" {
   plugin = "fly"
 
-  # The fly.io api token.
-  token = "YOUR_ACCESS_TOKEN"
+  # Fly.io API token
+  # This can also be set via the `FLY_API_TOKEN` environment variable.
+  # fly_api_token = "97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o"
 }
 ```
 

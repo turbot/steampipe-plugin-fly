@@ -6,11 +6,11 @@ import (
 )
 
 type flyConfig struct {
-	Token *string `cty:"token"`
+	FlyApiToken *string `cty:"fly_api_token"`
 }
 
 var ConfigSchema = map[string]*schema.Attribute{
-	"token": {
+	"fly_api_token": {
 		Type: schema.TypeString,
 	},
 }

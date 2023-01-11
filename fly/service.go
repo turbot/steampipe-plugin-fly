@@ -3,6 +3,7 @@ package fly
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 
@@ -16,14 +17,28 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*apiClient.Client, err
 		return cachedData.(*apiClient.Client), nil
 	}
 
-	// Prefer config options given in Steampipe
+	// Get the config
 	flyConfig := GetConfig(d.Connection)
-	if flyConfig.Token == nil {
-		return nil, fmt.Errorf("token must be passed")
+
+	/*
+		precedence of credentials:
+		- Credentials set in config
+		- FLY_API_TOKEN env var
+	*/
+	var token string
+	token = os.Getenv("FLY_API_TOKEN")
+
+	if flyConfig.FlyApiToken != nil {
+		token = *flyConfig.FlyApiToken
+	}
+
+	// Return if no credential specified
+	if token == "" {
+		return nil, fmt.Errorf("fly_api_token must be configured")
 	}
 
 	// Start with an empty Fly config
-	config := apiClient.ClientConfig{Token: flyConfig.Token}
+	config := apiClient.ClientConfig{FlyApiToken: flyConfig.FlyApiToken}
 
 	// Create the client
 	client, err := apiClient.CreateClient(ctx, config)
