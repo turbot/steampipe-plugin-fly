@@ -2,7 +2,7 @@
 organization: Turbot
 category: ["saas"]
 icon_url: "/images/plugins/turbot/fly.svg"
-brand_color: "#24185B"
+brand_color: "#8B5CF6"
 display_name: "Fly.io"
 short_name: "fly"
 description: "Steampipe plugin tto query applications, volumes, and more from your Fly organization."
