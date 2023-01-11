@@ -90,8 +90,8 @@ func listFlyIPs(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 			return nil, err
 		}
 
-		for _, volume := range query.App.IPAddresses.Nodes {
-			d.StreamListItem(ctx, volume)
+		for _, ip := range query.App.IPAddresses.Nodes {
+			d.StreamListItem(ctx, ip)
 
 			// Context can be cancelled due to manual cancellation or the limit has been hit
 			if d.RowsRemaining(ctx) == 0 {

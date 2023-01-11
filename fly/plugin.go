@@ -27,6 +27,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"fly_machine":             tableFlyMachine(ctx),
 			"fly_organization":        tableFlyOrganization(ctx),
 			"fly_organization_member": tableFlyOrganizationMember(ctx),
+			"fly_redis_database":      tableFlyRedisDatabase(ctx),
 			"fly_volume":              tableFlyVolume(ctx),
 		},
 	}
