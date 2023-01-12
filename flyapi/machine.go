@@ -53,7 +53,10 @@ type ListMachinesRequestConfiguration struct {
 	// When paginating forwards, the cursor to continue.
 	EndCursor string
 
+	// The ID of the application.
 	AppID string
+	
+	// The state of the machine.
 	State string
 }
 
