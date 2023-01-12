@@ -7,18 +7,18 @@ import (
 )
 
 type Member struct {
-	Name                string   `json:"name"`
-	Id                  string   `json:"id"`
-	Email               string   `json:"email"`
-	CreatedAt           string   `json:"createdAt"`
-	TwoFactorProtection bool     `json:"twoFactorProtection"`
 	AvatarUrl           string   `json:"avatarUrl"`
-	LastRegion          string   `json:"lastRegion"`
-	Username            string   `json:"username"`
-	HasNodeProxyApps    bool     `json:"hasNodeproxyApps"`
-	Trust               string   `json:"trust"`
+	CreatedAt           string   `json:"createdAt"`
+	Email               string   `json:"email"`
 	FeatureFlags        []string `json:"featureFlags"`
-	OrganizationId      string
+	HasNodeProxyApps    bool     `json:"hasNodeproxyApps"`
+	Id                  string   `json:"id"`
+	LastRegion          string   `json:"lastRegion"`
+	Name                string   `json:"name"`
+	OrganizationId      string   `json:"-"`
+	Trust               string   `json:"trust"`
+	TwoFactorProtection bool     `json:"twoFactorProtection"`
+	Username            string   `json:"username"`
 }
 
 type OrganizationMembershipsEdge struct {

@@ -16,102 +16,39 @@ func tableFlyOrganization(ctx context.Context) *plugin.Table {
 		Name:        "fly_organization",
 		Description: "Fly Organization",
 		List: &plugin.ListConfig{
-			Hydrate: listFlyOrganization,
+			Hydrate: listFlyOrganizations,
 		},
 		Get: &plugin.GetConfig{
 			Hydrate:    getFlyOrganization,
 			KeyColumns: plugin.SingleColumn("slug"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "id",
-				Description: "An unique identifier of the organization.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromGo(),
-			},
-			{
-				Name:        "slug",
-				Description: "The organization slug name.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "type",
-				Description: "The type of the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "billing_status",
-				Description: "The billing status of the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "credit_balance",
-				Description: "The current remaining credit balance of the organization.",
-				Type:        proto.ColumnType_INT,
-			},
-			{
-				Name:        "credit_balance_formatted",
-				Description: "The formatted current remaining credit balance of the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "is_credit_card_saved",
-				Description: "If true, a valid credit card is provided for billing.",
-				Type:        proto.ColumnType_BOOL,
-			},
-			{
-				Name:        "ssh_certificate",
-				Description: "Specifies the SSH certificate.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("SSHCertificate"),
-			},
-			{
-				Name:        "internal_numeric_id",
-				Description: "The internal numeric ID of the organization.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("InternalNumericID"),
-			},
-			{
-				Name:        "active_discount_name",
-				Description: "Specifies the active discount name.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "viewer_role",
-				Description: "Indicates who can view the details.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "remote_builder_image",
-				Description: "Specifies the remote builder image of the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "add_on_sso_link",
-				Description: "Specifies the addOn SSO link.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("AddOnSSOLink"),
-			},
-			{
-				Name:        "trust",
-				Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH.",
-				Type:        proto.ColumnType_STRING,
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the organization."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "An unique identifier of the organization.", Transform: transform.FromGo()},
+			{Name: "slug", Type: proto.ColumnType_STRING, Description: "The organization slug name."},
+			{Name: "type", Type: proto.ColumnType_STRING, Description: "The type of the organization."},
+			{Name: "billing_status", Type: proto.ColumnType_STRING, Description: "The billing status of the organization."},
+			{Name: "credit_balance", Type: proto.ColumnType_INT, Description: "The current remaining credit balance of the organization."},
+			{Name: "credit_balance_formatted", Type: proto.ColumnType_STRING, Description: "The formatted current remaining credit balance of the organization."},
+			{Name: "is_credit_card_saved", Type: proto.ColumnType_BOOL, Description: "If true, a valid credit card is provided for billing."},
+			{Name: "ssh_certificate", Type: proto.ColumnType_STRING, Description: "Specifies the SSH certificate.", Transform: transform.FromField("SSHCertificate")},
+			{Name: "internal_numeric_id", Type: proto.ColumnType_STRING, Description: "The internal numeric ID of the organization.", Transform: transform.FromField("InternalNumericID")},
+			{Name: "active_discount_name", Type: proto.ColumnType_STRING, Description: "Specifies the active discount name."},
+			{Name: "viewer_role", Type: proto.ColumnType_STRING, Description: "Indicates who can view the details."},
+			{Name: "remote_builder_image", Type: proto.ColumnType_STRING, Description: "Specifies the remote builder image of the organization."},
+			{Name: "add_on_sso_link", Type: proto.ColumnType_STRING, Description: "Specifies the addOn SSO link.", Transform: transform.FromField("AddOnSSOLink")},
+			{Name: "trust", Type: proto.ColumnType_STRING, Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH."},
 		},
 	}
 }
 
 //// LIST FUNCTION
 
-func listFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listFlyOrganizations(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("fly_organization.listFlyOrganization", "connection_error", err)
+		plugin.Logger(ctx).Error("fly_organization.listFlyOrganizations", "connection_error", err)
 		return nil, err
 	}
 
@@ -133,7 +70,7 @@ func listFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 	for {
 		query, err := flyapi.ListOrganizations(context.Background(), conn.Graphql, options)
 		if err != nil {
-			plugin.Logger(ctx).Error("fly_organization.listFlyOrganization", "query_error", err)
+			plugin.Logger(ctx).Error("fly_organization.listFlyOrganizations", "query_error", err)
 			return nil, err
 		}
 
@@ -166,6 +103,7 @@ func getFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydr
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_organization.getFlyOrganization", "connection_error", err)

@@ -8,19 +8,19 @@ import (
 )
 
 type Volume struct {
-	Name            string                 `json:"name"`
+	App             provider.GetFullAppApp `json:"app"`
+	AttachedMachine Machine                `json:"attachedMachine"`
+	CreatedAt       string                 `json:"createdAt"`
+	Encrypted       bool                   `json:"encrypted"`
+	Host            Host                   `json:"host"`
 	ID              string                 `json:"id"`
+	InternalId      string                 `json:"internalId"`
+	Name            string                 `json:"name"`
+	Region          string                 `json:"region"`
 	SizeGb          int                    `json:"sizeGb"`
 	State           string                 `json:"state"`
 	Status          string                 `json:"status"`
-	Region          string                 `json:"region"`
-	CreatedAt       string                 `json:"createdAt"`
-	InternalId      string                 `json:"internalId"`
 	UsedBytes       string                 `json:"usedBytes"`
-	Encrypted       bool                   `json:"encrypted"`
-	Host            Host                   `json:"host"`
-	AttachedMachine Machine                `json:"attachedMachine"`
-	App             provider.GetFullAppApp `json:"app"`
 }
 
 type Volumes struct {

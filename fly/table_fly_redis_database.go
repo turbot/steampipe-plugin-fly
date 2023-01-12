@@ -23,67 +23,18 @@ func tableFlyRedisDatabase(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the database.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "id",
-				Description: "A unique identifier of the database.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "hostname",
-				Description: "The database hostname.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "public_url",
-				Description: "The public URL of the database.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "primary_region",
-				Description: "The primary region where the database is located.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "private_ip",
-				Description: "Specifies the private IP address of the database.",
-				Type:        proto.ColumnType_IPADDR,
-			},
-			{
-				Name:        "password",
-				Description: "The database password.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "add_on_plan_name",
-				Description: "Specifies the database plan.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "options",
-				Description: "The database options.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "read_regions",
-				Description: "A list of database replica regions.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "add_on_plan",
-				Description: "Specifies the add-on plan.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "organization_id",
-				Description: "Specifies the organization.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Organization.ID"),
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the database."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the database."},
+			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "The database hostname."},
+			{Name: "public_url", Type: proto.ColumnType_STRING, Description: "The public URL of the database."},
+			{Name: "primary_region", Type: proto.ColumnType_STRING, Description: "The primary region where the database is located."},
+			{Name: "private_ip", Type: proto.ColumnType_IPADDR, Description: "Specifies the private IP address of the database."},
+			{Name: "password", Type: proto.ColumnType_STRING, Description: "The database password."},
+			{Name: "add_on_plan_name", Type: proto.ColumnType_STRING, Description: "Specifies the database plan."},
+			{Name: "options", Type: proto.ColumnType_JSON, Description: "The database options."},
+			{Name: "read_regions", Type: proto.ColumnType_JSON, Description: "A list of database replica regions."},
+			{Name: "add_on_plan", Type: proto.ColumnType_STRING, Description: "Specifies the add-on plan."},
+			{Name: "organization_id", Type: proto.ColumnType_STRING, Description: "Specifies the organization.", Transform: transform.FromField("Organization.ID")},
 		},
 	}
 }
@@ -91,6 +42,7 @@ func tableFlyRedisDatabase(ctx context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listFlyRedisDatabases(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_redis_database.listFlyRedisDatabases", "connection_error", err)
@@ -148,6 +100,7 @@ func getFlyRedisDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.Hyd
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_redis_database.getFlyRedisDatabase", "connection_error", err)

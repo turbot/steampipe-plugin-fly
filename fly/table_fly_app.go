@@ -23,72 +23,19 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("name"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the app.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "id",
-				Description: "An unique identifier of the app.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "network",
-				Description: "Specifies the app network.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "app_url",
-				Description: "The URL of the app.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "hostname",
-				Description: "The hostname of the app.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "status",
-				Description: "The status of the app.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "deployed",
-				Description: "If true, the app is successfully deployed.",
-				Type:        proto.ColumnType_BOOL,
-			},
-			{
-				Name:        "current_release_id",
-				Description: "Specifies the ID of the current app release.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("CurrentRelease.Id"),
-			},
-			{
-				Name:        "organization",
-				Description: "Specifies the organization details where the app is deployed.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "autoscaling",
-				Description: "Specifies the autoscaling information.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "config",
-				Description: "Specifies the app configuration.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "health_checks",
-				Description: "Specifies the app health check information.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "ip_addresses",
-				Description: "A list of IP addresses associated with the app.",
-				Type:        proto.ColumnType_JSON,
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the app."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "An unique identifier of the app."},
+			{Name: "network", Type: proto.ColumnType_STRING, Description: "Specifies the app network."},
+			{Name: "app_url", Type: proto.ColumnType_STRING, Description: "The URL of the app."},
+			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "The hostname of the app."},
+			{Name: "status", Type: proto.ColumnType_STRING, Description: "The status of the app."},
+			{Name: "deployed", Type: proto.ColumnType_BOOL, Description: "If true, the app is successfully deployed."},
+			{Name: "current_release_id", Type: proto.ColumnType_STRING, Description: "Specifies the ID of the current app release.", Transform: transform.FromField("CurrentRelease.Id")},
+			{Name: "organization", Type: proto.ColumnType_JSON, Description: "Specifies the organization details where the app is deployed."},
+			{Name: "autoscaling", Type: proto.ColumnType_JSON, Description: "Specifies the autoscaling information."},
+			{Name: "config", Type: proto.ColumnType_JSON, Description: "Specifies the app configuration."},
+			{Name: "health_checks", Type: proto.ColumnType_JSON, Description: "Specifies the app health check information."},
+			{Name: "ip_addresses", Type: proto.ColumnType_JSON, Description: "A list of IP addresses associated with the app."},
 		},
 	}
 }
@@ -96,6 +43,7 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listFlyApps(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_app.listFlyApps", "connection_error", err)
@@ -153,6 +101,7 @@ func getFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_app.getFlyApp", "connection_error", err)

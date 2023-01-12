@@ -2,7 +2,7 @@
 
 # Fly Plugin for Steampipe
 
-Use SQL to query applications, volumes, and more from your Fly organization.
+Use SQL to query applications, volumes, databases, and more from your Fly organization.
 
 - **[Get started →](https://hub.steampipe.io/plugins/turbot/fly)**
 - Documentation: [Table definitions & examples](https://hub.steampipe.io/plugins/turbot/fly/tables)

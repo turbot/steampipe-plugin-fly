@@ -5,7 +5,7 @@ icon_url: "/images/plugins/turbot/fly.svg"
 brand_color: "#8B5CF6"
 display_name: "Fly.io"
 short_name: "fly"
-description: "Steampipe plugin tto query applications, volumes, and more from your Fly organization."
+description: "Steampipe plugin tto query applications, volumes, databases, and more from your Fly organization."
 og_description: "Query Fly.io with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/fly-social-graphic.png"
 ---

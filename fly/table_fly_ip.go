@@ -25,31 +25,11 @@ func tableFlyIP(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "address",
-				Description: "The IP address",
-				Type:        proto.ColumnType_IPADDR,
-			},
-			{
-				Name:        "id",
-				Description: "A unique identifier of the IP address.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "created_at",
-				Description: "The timestamp when the IP address was created.",
-				Type:        proto.ColumnType_TIMESTAMP,
-			},
-			{
-				Name:        "region",
-				Description: "The region where the IP address is created.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "type",
-				Description: "Specifies the type of the IP address.",
-				Type:        proto.ColumnType_STRING,
-			},
+			{Name: "address", Type: proto.ColumnType_IPADDR, Description: "The IP address"},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the IP address."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the IP address was created."},
+			{Name: "region", Type: proto.ColumnType_STRING, Description: "The region where the IP address is created."},
+			{Name: "type", Type: proto.ColumnType_STRING, Description: "Specifies the type of the IP address."},
 		},
 	}
 }
@@ -60,6 +40,7 @@ func listFlyIPs(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 	appData := h.Item.(provider.GetFullAppApp)
 	appID := appData.Name
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_ip.listFlyIPs", "connection_error", err)
@@ -119,6 +100,7 @@ func getFlyIP(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_ip.getFlyIP", "connection_error", err)

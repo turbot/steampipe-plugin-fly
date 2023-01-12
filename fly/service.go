@@ -10,6 +10,7 @@ import (
 	"github.com/turbot/steampipe-plugin-fly/flyapi"
 )
 
+// getClient:: returns fly client after authentication
 func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error) {
 	// Load connection from cache, which preserves throttling protection etc
 	cacheKey := "fly"

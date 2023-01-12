@@ -7,18 +7,18 @@ import (
 )
 
 type Database struct {
-	Name          string       `json:"name"`
-	Id            string       `json:"id"`
-	Hostname      string       `json:"hostname"`
-	PublicUrl     string       `json:"publicUrl"`
-	PrimaryRegion string       `json:"primaryRegion"`
-	PrivateIp     string       `json:"privateIp"`
-	Password      string       `json:"password"`
+	AddOnPlan     AddOnPlan    `json:"addOnPlan"`
 	AddOnPlanName string       `json:"addOnPlanName"`
+	Hostname      string       `json:"hostname"`
+	Id            string       `json:"id"`
+	Name          string       `json:"name"`
 	Options       interface{}  `json:"options"`
 	Organization  Organization `json:"organization"`
+	Password      string       `json:"password"`
+	PrimaryRegion string       `json:"primaryRegion"`
+	PrivateIp     string       `json:"privateIp"`
+	PublicUrl     string       `json:"publicUrl"`
 	ReadRegions   []string     `json:"readRegions"`
-	AddOnPlan     AddOnPlan    `json:"addOnPlan"`
 }
 
 type RedisDatabases struct {

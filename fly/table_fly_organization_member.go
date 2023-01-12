@@ -16,87 +16,23 @@ func tableFlyOrganizationMember(ctx context.Context) *plugin.Table {
 		Name:        "fly_organization_member",
 		Description: "Fly Organization Member",
 		List: &plugin.ListConfig{
-			ParentHydrate: listFlyOrganization,
+			ParentHydrate: listFlyOrganizations,
 			Hydrate:       listFlyOrganizationMembers,
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the member.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.Name"),
-			},
-			{
-				Name:        "id",
-				Description: "A unique identifier of the member.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.Id"),
-			},
-			{
-				Name:        "email",
-				Description: "The email address of the member.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.Email"),
-			},
-			{
-				Name:        "username",
-				Description: "The username of the member.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.Username"),
-			},
-			{
-				Name:        "created_at",
-				Description: "The timestamp when the member was created.",
-				Type:        proto.ColumnType_TIMESTAMP,
-				Transform:   transform.FromField("Member.CreatedAt"),
-			},
-			{
-				Name:        "two_factor_protection",
-				Description: "If true, two-factor authentication is enabled for the member.",
-				Type:        proto.ColumnType_BOOL,
-				Transform:   transform.FromField("Member.TwoFactorProtection"),
-			},
-			{
-				Name:        "role",
-				Description: "The role of the member in the organization.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "avatar_url",
-				Description: "The avatar URL of the member.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.AvatarUrl"),
-			},
-			{
-				Name:        "last_region",
-				Description: "Specifies the region the member is recently accessed to.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.LastRegion"),
-			},
-			{
-				Name:        "has_node_proxy_apps",
-				Description: "True, if the member has node proxy app.",
-				Type:        proto.ColumnType_BOOL,
-				Transform:   transform.FromField("Member.HasNodeProxyApps"),
-			},
-			{
-				Name:        "trust",
-				Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.Trust"),
-			},
-			{
-				Name:        "organization_id",
-				Description: "The ID of the organization.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Member.OrganizationId"),
-			},
-			{
-				Name:        "feature_flags",
-				Description: "A list of feature flags.",
-				Type:        proto.ColumnType_JSON,
-				Transform:   transform.FromField("Member.FeatureFlags"),
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the member.", Transform: transform.FromField("Member.Name")},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the member.", Transform: transform.FromField("Member.Id")},
+			{Name: "email", Type: proto.ColumnType_STRING, Description: "The email address of the member.", Transform: transform.FromField("Member.Email")},
+			{Name: "username", Type: proto.ColumnType_STRING, Description: "The username of the member.", Transform: transform.FromField("Member.Username")},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the member was created.", Transform: transform.FromField("Member.CreatedAt")},
+			{Name: "two_factor_protection", Type: proto.ColumnType_BOOL, Description: "If true, two-factor authentication is enabled for the member.", Transform: transform.FromField("Member.TwoFactorProtection")},
+			{Name: "role", Type: proto.ColumnType_STRING, Description: "The role of the member in the organization."},
+			{Name: "avatar_url", Type: proto.ColumnType_STRING, Description: "The avatar URL of the member.", Transform: transform.FromField("Member.AvatarUrl")},
+			{Name: "last_region", Type: proto.ColumnType_STRING, Description: "Specifies the region the member is recently accessed to.", Transform: transform.FromField("Member.LastRegion")},
+			{Name: "has_node_proxy_apps", Type: proto.ColumnType_BOOL, Description: "True, if the member has node proxy app.", Transform: transform.FromField("Member.HasNodeProxyApps")},
+			{Name: "trust", Type: proto.ColumnType_STRING, Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH.", Transform: transform.FromField("Member.Trust")},
+			{Name: "organization_id", Type: proto.ColumnType_STRING, Description: "The ID of the organization.", Transform: transform.FromField("Member.OrganizationId")},
+			{Name: "feature_flags", Type: proto.ColumnType_JSON, Description: "A list of feature flags.", Transform: transform.FromField("Member.FeatureFlags")},
 		},
 	}
 }
@@ -107,6 +43,7 @@ func listFlyOrganizationMembers(ctx context.Context, d *plugin.QueryData, h *plu
 	orgData := h.Item.(flyapi.Organization)
 	orgID := orgData.ID
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_organization_member.listFlyOrganizationMembers", "connection_error", err)

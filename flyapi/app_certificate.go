@@ -7,24 +7,23 @@ import (
 )
 
 type AppCertificate struct {
-	Hostname                  string `json:"hostname"`
-	Domain                    string `json:"domain"`
-	Id                        string `json:"id"`
-	CreatedAt                 string `json:"createdAt"`
-	Source                    string `json:"source"`
 	CertificateAuthority      string `json:"certificateAuthority"`
-	Verified                  bool   `json:"check"`
 	ClientStatus              string `json:"clientStatus"`
+	CreatedAt                 string `json:"createdAt"`
 	DnsProvider               string `json:"dnsProvider"`
 	DnsValidationHostname     string `json:"dnsValidationHostname"`
 	DnsValidationInstructions string `json:"dnsValidationInstructions"`
 	DnsValidationTarget       string `json:"dnsValidationTarget"`
+	Domain                    string `json:"domain"`
+	Hostname                  string `json:"hostname"`
+	Id                        string `json:"id"`
 	IsAcmeAlpnConfigured      bool   `json:"isAcmeAlpnConfigured"`
 	IsAcmeDnsConfigured       bool   `json:"isAcmeDnsConfigured"`
 	IsApex                    bool   `json:"isApex"`
 	IsConfigured              bool   `json:"isConfigured"`
 	IsWildcard                bool   `json:"isWildcard"`
-	AppId                     string
+	Source                    string `json:"source"`
+	Verified                  bool   `json:"check"`
 }
 
 type Certificates struct {

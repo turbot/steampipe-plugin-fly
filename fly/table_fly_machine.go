@@ -27,60 +27,16 @@ func tableFlyMachine(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the machine.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "id",
-				Description: "A unique identifier of the machine.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromGo(),
-			},
-			{
-				Name:        "state",
-				Description: "The current status of the machine.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "region",
-				Description: "The region where the machine is created.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "created_at",
-				Description: "The timestamp when the machine was created.",
-				Type:        proto.ColumnType_TIMESTAMP,
-			},
-			{
-				Name:        "updated_at",
-				Description: "The timestamp when the machine was last modified.",
-				Type:        proto.ColumnType_TIMESTAMP,
-			},
-			{
-				Name:        "instance_id",
-				Description: "Specifies the instance ID.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("InstanceID"),
-			},
-			{
-				Name:        "host_id",
-				Description: "Specifies the machine host ID.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Host.ID"),
-			},
-			{
-				Name:        "config",
-				Description: "Specifies the machine configuration.",
-				Type:        proto.ColumnType_JSON,
-			},
-			{
-				Name:        "app_id",
-				Description: "Specifies the application.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromQual("app_id"),
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the machine."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the machine.", Transform: transform.FromGo()},
+			{Name: "state", Type: proto.ColumnType_STRING, Description: "The current status of the machine."},
+			{Name: "region", Type: proto.ColumnType_STRING, Description: "The region where the machine is created."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the machine was created."},
+			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the machine was last modified."},
+			{Name: "instance_id", Type: proto.ColumnType_STRING, Description: "Specifies the instance ID.", Transform: transform.FromField("InstanceID")},
+			{Name: "host_id", Type: proto.ColumnType_STRING, Description: "Specifies the machine host ID.", Transform: transform.FromField("Host.ID")},
+			{Name: "config", Type: proto.ColumnType_JSON, Description: "Specifies the machine configuration."},
+			{Name: "app_id", Type: proto.ColumnType_STRING, Description: "Specifies the application.", Transform: transform.FromQual("app_id")},
 		},
 	}
 }
@@ -88,6 +44,7 @@ func tableFlyMachine(ctx context.Context) *plugin.Table {
 //// LIST FUNCTION
 
 func listFlyMachines(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_machine.listFlyMachines", "connection_error", err)
@@ -154,6 +111,7 @@ func getFlyMachine(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDa
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_machine.getFlyMachine", "connection_error", err)

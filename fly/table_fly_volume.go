@@ -26,75 +26,19 @@ func tableFlyVolume(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 		},
 		Columns: []*plugin.Column{
-			{
-				Name:        "name",
-				Description: "The name of the volume.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "id",
-				Description: "A unique identifier of the volume.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromGo(),
-			},
-			{
-				Name:        "state",
-				Description: "The configuration state of the volume.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "encrypted",
-				Description: "If true, the volume is encrypted.",
-				Type:        proto.ColumnType_BOOL,
-			},
-			{
-				Name:        "region",
-				Description: "The region where the volume is created.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "size_gb",
-				Description: "Specifies the size of the volume.",
-				Type:        proto.ColumnType_INT,
-			},
-			{
-				Name:        "created_at",
-				Description: "The timestamp when the volume was created.",
-				Type:        proto.ColumnType_TIMESTAMP,
-			},
-			{
-				Name:        "status",
-				Description: "The current status of the volume.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "internal_id",
-				Description: "Specifies the internal ID of the volume.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "used_bytes",
-				Description: "Specifies the amount of storage used in bytes.",
-				Type:        proto.ColumnType_STRING,
-			},
-			{
-				Name:        "host_id",
-				Description: "Specifies the volume host ID.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("Host.ID"),
-			},
-			{
-				Name:        "attached_machine_id",
-				Description: "Specifies the ID of the machine; the volume is attached.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("AttachedMachine.ID"),
-			},
-			{
-				Name:        "app_id",
-				Description: "Specifies the ID of the application.",
-				Type:        proto.ColumnType_STRING,
-				Transform:   transform.FromField("App.Id"),
-			},
+			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the volume."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the volume.", Transform: transform.FromGo()},
+			{Name: "state", Description: "The configuration state of the volume.", Type: proto.ColumnType_STRING},
+			{Name: "encrypted", Type: proto.ColumnType_BOOL, Description: "If true, the volume is encrypted."},
+			{Name: "region", Type: proto.ColumnType_STRING, Description: "The region where the volume is created."},
+			{Name: "size_gb", Type: proto.ColumnType_INT, Description: "Specifies the size of the volume."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the volume was created."},
+			{Name: "status", Type: proto.ColumnType_STRING, Description: "The current status of the volume."},
+			{Name: "internal_id", Type: proto.ColumnType_STRING, Description: "Specifies the internal ID of the volume."},
+			{Name: "used_bytes", Type: proto.ColumnType_STRING, Description: "Specifies the amount of storage used in bytes."},
+			{Name: "host_id", Type: proto.ColumnType_STRING, Description: "Specifies the volume host ID.", Transform: transform.FromField("Host.ID")},
+			{Name: "attached_machine_id", Type: proto.ColumnType_STRING, Description: "Specifies the ID of the machine; the volume is attached.", Transform: transform.FromField("AttachedMachine.ID")},
+			{Name: "app_id", Type: proto.ColumnType_STRING, Description: "Specifies the ID of the application.", Transform: transform.FromField("App.Id")},
 		},
 	}
 }
@@ -105,6 +49,7 @@ func listFlyVolumes(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 	appData := h.Item.(provider.GetFullAppApp)
 	appID := appData.Name
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_volume.listFlyVolumes", "connection_error", err)
@@ -164,6 +109,7 @@ func getFlyVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 		return nil, nil
 	}
 
+	// Create client
 	conn, err := getClient(ctx, d)
 	if err != nil {
 		plugin.Logger(ctx).Error("fly_volume.getFlyVolume", "connection_error", err)

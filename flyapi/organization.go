@@ -7,21 +7,21 @@ import (
 )
 
 type Organization struct {
-	Name                   string `json:"name"`
-	ID                     string `json:"id"`
-	Slug                   string `json:"slug"`
-	Type                   string `json:"type"`
+	ActiveDiscountName     string `json:"activeDiscountName"`
+	AddOnSSOLink           string `json:"addOnSsoLink"`
 	BillingStatus          string `json:"billingStatus"`
 	CreditBalance          int    `json:"creditBalance"`
 	CreditBalanceFormatted string `json:"creditBalanceFormatted"`
-	IsCreditCardSaved      bool   `json:"isCreditCardSaved"`
-	SSHCertificate         string `json:"sshCertificate"`
+	ID                     string `json:"id"`
 	InternalNumericID      string `json:"internalNumericId"`
-	ActiveDiscountName     string `json:"activeDiscountName"`
-	ViewerRole             string `json:"viewerRole"`
+	IsCreditCardSaved      bool   `json:"isCreditCardSaved"`
+	Name                   string `json:"name"`
 	RemoteBuilderImage     string `json:"remoteBuilderImage"`
-	AddOnSSOLink           string `json:"addOnSsoLink"`
+	SSHCertificate         string `json:"sshCertificate"`
+	Slug                   string `json:"slug"`
 	Trust                  string `json:"trust"`
+	Type                   string `json:"type"`
+	ViewerRole             string `json:"viewerRole"`
 }
 
 type ListOrganizationsRequestConfiguration struct {

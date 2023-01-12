@@ -7,9 +7,9 @@ import (
 )
 
 type IPAddress struct {
-	Id        string `json:"id"`
 	Address   string `json:"address"`
 	CreatedAt string `json:"createdAt"`
+	Id        string `json:"id"`
 	Region    string `json:"region"`
 	Type      string `json:"type"`
 }

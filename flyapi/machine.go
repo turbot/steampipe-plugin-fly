@@ -7,15 +7,15 @@ import (
 )
 
 type Machine struct {
-	Name       string               `json:"name"`
+	Config     MachineConfiguration `json:"config"`
+	CreatedAt  string               `json:"createdAt"`
+	Host       Host                 `json:"host"`
 	ID         string               `json:"id"`
+	InstanceID string               `json:"instanceId"`
+	Name       string               `json:"name"`
 	Region     string               `json:"region"`
 	State      string               `json:"state"`
-	CreatedAt  string               `json:"createdAt"`
 	UpdatedAt  string               `json:"updatedAt"`
-	InstanceID string               `json:"instanceId"`
-	Host       Host                 `json:"host"`
-	Config     MachineConfiguration `json:"config"`
 }
 
 type Mount struct {
