@@ -27,6 +27,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"fly_app":                 tableFlyApp(ctx),
 			"fly_app_certificate":     tableFlyAppCertificate(ctx),
 			"fly_ip":                  tableFlyIP(ctx),
+			"fly_location":            tableFlyLocation(ctx),
 			"fly_machine":             tableFlyMachine(ctx),
 			"fly_organization":        tableFlyOrganization(ctx),
 			"fly_organization_member": tableFlyOrganizationMember(ctx),
