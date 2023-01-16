@@ -24,7 +24,7 @@ func tableFlyApp(ctx context.Context) *plugin.Table {
 		},
 		Columns: []*plugin.Column{
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the app."},
-			{Name: "id", Type: proto.ColumnType_STRING, Description: "An unique identifier of the app."},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the app."},
 			{Name: "network", Type: proto.ColumnType_STRING, Description: "Specifies the app network."},
 			{Name: "app_url", Type: proto.ColumnType_STRING, Description: "The URL of the app."},
 			{Name: "hostname", Type: proto.ColumnType_STRING, Description: "The hostname of the app."},

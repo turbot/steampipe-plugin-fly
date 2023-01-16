@@ -16,7 +16,7 @@ from
   fly_app;
 ```
 
-### List all suspended apps
+### List suspended apps
 
 ```sql
 select

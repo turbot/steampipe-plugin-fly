@@ -45,7 +45,7 @@ where
   (options -> 'eviction')::boolean;
 ```
 
-### List all large databases
+### List large databases
 
 ```sql
 select

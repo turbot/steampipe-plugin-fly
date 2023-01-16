@@ -17,7 +17,7 @@ from
   fly_volume;
 ```
 
-### List all unencrypted volumes
+### List unencrypted volumes
 
 ```sql
 select

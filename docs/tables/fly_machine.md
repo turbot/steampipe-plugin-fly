@@ -17,7 +17,7 @@ from
   fly_machine;
 ```
 
-### List all stopped machines
+### List stopped machines
 
 ```sql
 select
