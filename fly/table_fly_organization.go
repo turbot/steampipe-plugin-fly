@@ -99,6 +99,8 @@ func listFlyOrganizations(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 
 func getFlyOrganization(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	slug := d.EqualsQualString("slug")
+
+	// Return nil, if empty
 	if slug == "" {
 		return nil, nil
 	}

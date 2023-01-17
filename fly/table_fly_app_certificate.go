@@ -108,6 +108,8 @@ func listFlyAppCertificates(ctx context.Context, d *plugin.QueryData, h *plugin.
 
 func getFlyAppCertificate(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	certID := d.EqualsQualString("id")
+	
+	// Return nil, if empty
 	if certID == "" {
 		return nil, nil
 	}

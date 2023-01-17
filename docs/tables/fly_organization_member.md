@@ -47,7 +47,7 @@ where
   not two_factor_protection;
 ```
 
-### List all members with limited access
+### List all members with restricted access
 
 ```sql
 select

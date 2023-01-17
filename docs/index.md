@@ -5,7 +5,7 @@ icon_url: "/images/plugins/turbot/fly.svg"
 brand_color: "#8B5CF6"
 display_name: "Fly.io"
 short_name: "fly"
-description: "Steampipe plugin tto query applications, volumes, databases, and more from your Fly organization."
+description: "Steampipe plugin to query applications, volumes, databases, and more from your Fly organization."
 og_description: "Query Fly.io with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/fly-social-graphic.png"
 ---
@@ -72,6 +72,14 @@ connection "fly" {
   # This can also be set via the `FLY_API_TOKEN` environment variable.
   # fly_api_token = "97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o"
 }
+```
+
+### Credentials from Environment Variables
+
+The Fly plugin will use the standard Fly environment variables to obtain credentials **only if other arguments (`fly_api_token`) are not specified** in the connection:
+
+```sh
+export FLY_API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
 ```
 
 ## Get involved

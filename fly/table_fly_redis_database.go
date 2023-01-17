@@ -96,6 +96,8 @@ func listFlyRedisDatabases(ctx context.Context, d *plugin.QueryData, _ *plugin.H
 
 func getFlyRedisDatabase(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	id := d.EqualsQualString("id")
+
+	// Return nil, if empty
 	if id == "" {
 		return nil, nil
 	}

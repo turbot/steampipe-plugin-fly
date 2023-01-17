@@ -107,6 +107,8 @@ func listFlyMachines(ctx context.Context, d *plugin.QueryData, _ *plugin.Hydrate
 
 func getFlyMachine(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	machineID := d.EqualsQualString("id")
+
+	// Return nil, if empty
 	if machineID == "" {
 		return nil, nil
 	}

@@ -25,7 +25,7 @@ func tableFlyIP(ctx context.Context) *plugin.Table {
 			KeyColumns: plugin.SingleColumn("id"),
 		},
 		Columns: []*plugin.Column{
-			{Name: "address", Type: proto.ColumnType_IPADDR, Description: "The IP address"},
+			{Name: "address", Type: proto.ColumnType_IPADDR, Description: "The IP address."},
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the IP address."},
 			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The timestamp when the IP address was created."},
 			{Name: "region", Type: proto.ColumnType_STRING, Description: "The region where the IP address is created."},
@@ -96,6 +96,8 @@ func listFlyIPs(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 
 func getFlyIP(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	id := d.EqualsQualString("id")
+
+	// Return nil, if empty
 	if id == "" {
 		return nil, nil
 	}

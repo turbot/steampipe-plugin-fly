@@ -23,7 +23,7 @@ func tableFlyLocation(ctx context.Context) *plugin.Table {
 			{Name: "locality", Type: proto.ColumnType_STRING, Description: "Specifies the locality."},
 			{Name: "state", Type: proto.ColumnType_STRING, Description: "The state of the location."},
 			{Name: "country", Type: proto.ColumnType_STRING, Description: "Specifies the country name."},
-			{Name: "coordinates", Type: proto.ColumnType_JSON, Description: "Specifies the latitude an longitude of the location."},
+			{Name: "coordinates", Type: proto.ColumnType_JSON, Description: "Specifies the latitude and longitude of the location."},
 		},
 	}
 }

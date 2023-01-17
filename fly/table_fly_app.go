@@ -97,6 +97,8 @@ func listFlyApps(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 
 func getFlyApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	name := d.EqualsQualString("name")
+
+	// Return nil, if empty
 	if name == "" {
 		return nil, nil
 	}

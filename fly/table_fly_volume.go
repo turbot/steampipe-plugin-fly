@@ -28,7 +28,7 @@ func tableFlyVolume(ctx context.Context) *plugin.Table {
 		Columns: []*plugin.Column{
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "The name of the volume."},
 			{Name: "id", Type: proto.ColumnType_STRING, Description: "A unique identifier of the volume.", Transform: transform.FromGo()},
-			{Name: "state", Description: "The configuration state of the volume.", Type: proto.ColumnType_STRING},
+			{Name: "state", Type: proto.ColumnType_STRING, Description: "The configuration state of the volume."},
 			{Name: "encrypted", Type: proto.ColumnType_BOOL, Description: "If true, the volume is encrypted."},
 			{Name: "region", Type: proto.ColumnType_STRING, Description: "The region where the volume is created."},
 			{Name: "size_gb", Type: proto.ColumnType_INT, Description: "Specifies the size of the volume."},
@@ -105,6 +105,8 @@ func listFlyVolumes(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateD
 
 func getFlyVolume(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	volumeID := d.EqualsQualString("id")
+
+	// Return nil, if empty
 	if volumeID == "" {
 		return nil, nil
 	}
