@@ -33,7 +33,7 @@ func tableFlyRedisDatabase(ctx context.Context) *plugin.Table {
 			{Name: "add_on_plan_name", Type: proto.ColumnType_STRING, Description: "Specifies the database plan."},
 			{Name: "options", Type: proto.ColumnType_JSON, Description: "The database options."},
 			{Name: "read_regions", Type: proto.ColumnType_JSON, Description: "A list of database replica regions."},
-			{Name: "add_on_plan", Type: proto.ColumnType_STRING, Description: "Specifies the add-on plan."},
+			{Name: "add_on_plan", Type: proto.ColumnType_JSON, Description: "Specifies the add-on plan."},
 			{Name: "organization_id", Type: proto.ColumnType_STRING, Description: "Specifies the organization.", Transform: transform.FromField("Organization.ID")},
 		},
 	}

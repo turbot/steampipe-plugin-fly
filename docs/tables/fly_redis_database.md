@@ -56,5 +56,5 @@ select
 from
   fly_redis_database
 where
-  addOnPlan ->> 'maxDataSize' = '3 GB';
+  add_on_plan ->> 'maxDataSize' = '3 GB';
 ```
