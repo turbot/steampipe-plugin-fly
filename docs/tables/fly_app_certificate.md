@@ -60,3 +60,17 @@ select
 from
   fly_app_certificate;
 ```
+
+### List certificates associated with a specific app
+
+```sql
+select
+  domain,
+  id,
+  hostname,
+  created_at,
+  source
+from
+  fly_app_certificate
+where app_id = 'fly-builder-purple-cloud-1058';
+```

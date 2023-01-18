@@ -41,3 +41,16 @@ from
   fly_app as a
   join fly_volume as v on v.app_id = a.id and not v.encrypted;
 ```
+
+### List apps with unverified certificates
+
+```sql
+select
+  a.name as app_name,
+  a.status,
+  c.domain,
+  c.hostname
+from
+  fly_app as a
+  join fly_app_certificate as c on a.id = c.app_id and not c.verified;
+```

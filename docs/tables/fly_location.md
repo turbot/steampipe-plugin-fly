@@ -17,6 +17,20 @@ from
   fly_location;
 ```
 
+### List all available location in a specific country
+
+```sql
+select
+  title,
+  locality,
+  state,
+  coordinates
+from
+  fly_location
+where
+  country = 'India';
+```
+
 ### Get count of Fly data centers per country
 
 ```sql
