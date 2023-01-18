@@ -22,7 +22,7 @@ func tableFlyAppCertificate(ctx context.Context) *plugin.Table {
 		},
 		Get: &plugin.GetConfig{
 			Hydrate:    getFlyAppCertificate,
-			KeyColumns: plugin.SingleColumn("id"),
+			KeyColumns: plugin.AllColumns([]string{"id", "app_id"}),
 		},
 		Columns: []*plugin.Column{
 			{Name: "domain", Description: "The fully qualified domain name of the certificate.", Type: proto.ColumnType_STRING},
@@ -42,6 +42,7 @@ func tableFlyAppCertificate(ctx context.Context) *plugin.Table {
 			{Name: "is_apex", Description: "True, if the certificate is a apex certificate.", Type: proto.ColumnType_BOOL},
 			{Name: "is_configured", Description: "If true, certificate is configured with valid DNS configuration.", Type: proto.ColumnType_BOOL},
 			{Name: "is_wildcard", Description: "If true, the hostname of the certificate contains wildcard.", Type: proto.ColumnType_BOOL},
+			{Name: "app_id", Description: "Specifies the ID of the app.", Type: proto.ColumnType_STRING},
 		},
 	}
 }
@@ -84,6 +85,7 @@ func listFlyAppCertificates(ctx context.Context, d *plugin.QueryData, h *plugin.
 		}
 
 		for _, cert := range query.App.Certificates.Nodes {
+			cert.AppId = query.App.Name
 			d.StreamListItem(ctx, cert)
 
 			// Context can be cancelled due to manual cancellation or the limit has been hit
@@ -108,9 +110,10 @@ func listFlyAppCertificates(ctx context.Context, d *plugin.QueryData, h *plugin.
 
 func getFlyAppCertificate(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	certID := d.EqualsQualString("id")
-	
+	appId := d.EqualsQualString("app_id")
+
 	// Return nil, if empty
-	if certID == "" {
+	if certID == "" || appId == "" {
 		return nil, nil
 	}
 
@@ -127,5 +130,9 @@ func getFlyAppCertificate(ctx context.Context, d *plugin.QueryData, _ *plugin.Hy
 		return nil, err
 	}
 
-	return query.Certificate, nil
+	// Append the AppId with the response
+	result := query.Certificate
+	result.AppId = appId
+
+	return result, nil
 }

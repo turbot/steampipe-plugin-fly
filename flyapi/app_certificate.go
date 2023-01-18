@@ -7,6 +7,7 @@ import (
 )
 
 type AppCertificate struct {
+	AppId                     string `json:"-"`
 	CertificateAuthority      string `json:"certificateAuthority"`
 	ClientStatus              string `json:"clientStatus"`
 	CreatedAt                 string `json:"createdAt"`
@@ -33,6 +34,7 @@ type Certificates struct {
 }
 
 type CertificateQueryApp struct {
+	Name         string       `json:"name"`
 	Certificates Certificates `json:"certificates"`
 }
 
