@@ -31,3 +31,17 @@ from
 where
   not is_credit_card_saved;
 ```
+
+### List organizations without SSH certificate
+
+```sql
+select
+  name,
+  id,
+  slug,
+  type
+from
+  fly_organization
+where
+  ssh_certificate is null;
+```

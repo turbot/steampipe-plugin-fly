@@ -32,7 +32,7 @@ where
   role = 'ADMIN';
 ```
 
-### List all members for which two-factor authentication is not configured
+### List all members with two-factor authentication disabled
 
 ```sql
 select

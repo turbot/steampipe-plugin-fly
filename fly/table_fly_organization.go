@@ -34,7 +34,7 @@ func tableFlyOrganization(ctx context.Context) *plugin.Table {
 			{Name: "ssh_certificate", Type: proto.ColumnType_STRING, Description: "Specifies the SSH certificate.", Transform: transform.FromField("SSHCertificate")},
 			{Name: "internal_numeric_id", Type: proto.ColumnType_STRING, Description: "The internal numeric ID of the organization.", Transform: transform.FromField("InternalNumericID")},
 			{Name: "active_discount_name", Type: proto.ColumnType_STRING, Description: "Specifies the active discount name."},
-			{Name: "viewer_role", Type: proto.ColumnType_STRING, Description: "Indicaßßßßtes who can view the details."},
+			{Name: "viewer_role", Type: proto.ColumnType_STRING, Description: "Indicates who can view the details."},
 			{Name: "remote_builder_image", Type: proto.ColumnType_STRING, Description: "Specifies the remote builder image of the organization."},
 			{Name: "add_on_sso_link", Type: proto.ColumnType_STRING, Description: "Specifies the addOn SSO link.", Transform: transform.FromField("AddOnSSOLink")},
 			{Name: "trust", Type: proto.ColumnType_STRING, Description: "Specifies the trust level. Possible values are: UNKNOWN, RESTRICTED, BANNED, LOW, HIGH."},

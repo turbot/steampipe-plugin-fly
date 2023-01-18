@@ -69,6 +69,7 @@ connection "fly" {
   plugin = "fly"
 
   # Fly.io API token.
+  # To generate the token please visit https://fly.io/docs/flyctl/auth-token/
   # This can also be set via the `FLY_API_TOKEN` environment variable.
   # fly_api_token = "97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o"
 }
@@ -76,7 +77,7 @@ connection "fly" {
 
 ### Credentials from Environment Variables
 
-The Fly plugin will use the standard Fly environment variables to obtain credentials **only if other arguments (`fly_api_token`) are not specified** in the connection:
+The Fly plugin will use the standard Fly environment variables to obtain credentials **only if other argument (`fly_api_token`) is not specified** in the connection:
 
 ```sh
 export FLY_API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
