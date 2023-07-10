@@ -58,7 +58,7 @@ steampipe plugin install fly
 | Credentials | Fly requires an [API token](https://fly.io/docs/flyctl/auth-token/) for all requests.                                                                                  |
 | Permissions | API tokens have the same permissions as the user who creates them, and if the user permissions change, the API token permissions also change.                          |
 | Radius      | Each connection represents a single Fly Installation.                                                                                                                  |
-| Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/fly.spc`)<br />2. Credentials specified in environment variable, e.g., `FLY_API_TOKEN`. |
+| Resolution  | 1. Credentials explicitly set in a steampipe config file (`~/.steampipe/config/fly.spc`)<br />2. Credentials specified in environment variable, e.g., `API_TOKEN`. |
 
 ### Configuration
 
@@ -70,17 +70,17 @@ connection "fly" {
 
   # Fly.io API token.
   # To generate the token please visit https://fly.io/docs/flyctl/auth-token/
-  # This can also be set via the `FLY_API_TOKEN` environment variable.
-  # fly_api_token = "97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o"
+  # This can also be set via the `API_TOKEN` environment variable.
+  # api_token = "97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o"
 }
 ```
 
 ### Credentials from Environment Variables
 
-The Fly plugin will use the standard Fly environment variables to obtain credentials **only if other argument (`fly_api_token`) is not specified** in the connection:
+The Fly plugin will use the standard Fly environment variables to obtain credentials **only if other argument (`api_token`) is not specified** in the connection:
 
 ```sh
-export FLY_API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
+export API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
 ```
 
 ## Get involved
