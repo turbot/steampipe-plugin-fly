@@ -1,3 +1,9 @@
+## v0.1.1 [2023-07-11]
+
+_Bug fixes_
+
+- Fixed the plugin's config argument to use `api_token` instead of `fly_api_token` to align with the API documentation. ([#6](https://github.com/turbot/steampipe-plugin-fly/pull/6))
+
 ## v0.1.0 [2023-04-11]
 
 _Dependencies_
