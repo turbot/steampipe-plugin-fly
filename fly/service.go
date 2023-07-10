@@ -24,10 +24,10 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error)
 	/*
 		precedence of credentials:
 		- Credentials set in config
-		- API_TOKEN env var
+		- FLY_API_TOKEN env var
 	*/
 	var token string
-	token = os.Getenv("API_TOKEN")
+	token = os.Getenv("FLY_API_TOKEN")
 
 	if flyConfig.ApiToken != nil {
 		token = *flyConfig.ApiToken
