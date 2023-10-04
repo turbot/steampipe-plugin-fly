@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/Khan/genqlient v0.5.0
 	github.com/fly-apps/terraform-provider-fly v0.0.20
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.6.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.6.2
 )
 
 require (
