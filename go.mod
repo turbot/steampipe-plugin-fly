@@ -3,7 +3,7 @@ module github.com/turbot/steampipe-plugin-fly
 go 1.21
 
 require (
-	github.com/Khan/genqlient v0.5.0
+	github.com/Khan/genqlient v0.6.0
 	github.com/fly-apps/terraform-provider-fly v0.0.20
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.6.2
 )
