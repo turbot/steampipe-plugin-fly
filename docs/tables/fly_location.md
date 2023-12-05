@@ -16,7 +16,18 @@ The `fly_location` table provides insights into the geographical deployment of a
 ### Basic info
 Explore the geographical details of flight locations, such as name, title, and locality, to gain a better understanding of your flight data and make informed decisions about travel routes and destinations.
 
-```sql
+```sql+postgres
+select
+  name,
+  title,
+  locality,
+  state,
+  country
+from
+  fly_location;
+```
+
+```sql+sqlite
 select
   name,
   title,
@@ -30,7 +41,19 @@ from
 ### List all available location in a specific country
 Discover the segments that are available within a specific country. This can be useful for pinpointing locations for potential business expansion or understanding demographic distribution.
 
-```sql
+```sql+postgres
+select
+  title,
+  locality,
+  state,
+  coordinates
+from
+  fly_location
+where
+  country = 'India';
+```
+
+```sql+sqlite
 select
   title,
   locality,
@@ -45,7 +68,17 @@ where
 ### Get count of Fly data centers per country
 Analyze the distribution of Fly data centers across different countries. This is useful for understanding where resources are concentrated and can inform decisions about where to deploy additional infrastructure.
 
-```sql
+```sql+postgres
+select
+  country,
+  count(name)
+from
+  fly_location
+group by
+  country;
+```
+
+```sql+sqlite
 select
   country,
   count(name)

@@ -16,7 +16,17 @@ The `fly_app` table provides insights into Fly Apps. As a developer or a DevOps 
 ### Basic info
 Explore which applications are currently active, by assessing their status and associated URLs. This can help in managing and monitoring the applications more effectively.
 
-```sql
+```sql+postgres
+select
+  name,
+  app_url,
+  status,
+  hostname
+from
+  fly_app;
+```
+
+```sql+sqlite
 select
   name,
   app_url,
@@ -29,7 +39,19 @@ from
 ### List suspended apps
 Explore which applications have been suspended, providing a way to manage and review their status and further action. This is useful for maintaining the health and efficiency of your application environment.
 
-```sql
+```sql+postgres
+select
+  name,
+  app_url,
+  status,
+  hostname
+from
+  fly_app
+where
+  status = 'suspended';
+```
+
+```sql+sqlite
 select
   name,
   app_url,
@@ -44,7 +66,7 @@ where
 ### List unencrypted volumes attached to the instances
 This query helps to identify any unencrypted volumes attached to applications, which is crucial for maintaining data security and compliance. It's a practical tool for reviewing and rectifying potential vulnerabilities in your system.
 
-```sql
+```sql+postgres
 select
   a.name,
   v.name,
@@ -54,10 +76,20 @@ from
   join fly_volume as v on v.app_id = a.id and not v.encrypted;
 ```
 
+```sql+sqlite
+select
+  a.name,
+  v.name,
+  v.encrypted
+from
+  fly_app as a
+  join fly_volume as v on v.app_id = a.id and v.encrypted = 0;
+```
+
 ### List apps with unverified certificates
 Discover the segments that contain applications with unverified certificates. This is useful in identifying potential security risks within your system.
 
-```sql
+```sql+postgres
 select
   a.name as app_name,
   a.status,
@@ -66,4 +98,15 @@ select
 from
   fly_app as a
   join fly_app_certificate as c on a.id = c.app_id and not c.verified;
+```
+
+```sql+sqlite
+select
+  a.name as app_name,
+  a.status,
+  c.domain,
+  c.hostname
+from
+  fly_app as a
+  join fly_app_certificate as c on a.id = c.app_id and c.verified = 0;
 ```

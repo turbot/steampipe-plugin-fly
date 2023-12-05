@@ -16,7 +16,18 @@ The `fly_machine` table provides insights into Machines within the Fly.io platfo
 ### Basic info
 Explore the status and location of various machines in your fleet to understand their operational distribution and longevity. This could be useful for assessing the need for new purchases or redistributions based on regional demands and machine age.
 
-```sql
+```sql+postgres
+select
+  name,
+  id,
+  state,
+  region,
+  created_at
+from
+  fly_machine;
+```
+
+```sql+sqlite
 select
   name,
   id,
@@ -30,7 +41,20 @@ from
 ### List stopped machines
 Discover the segments that consist of halted machines, allowing you to analyze your resources and optimize accordingly. This is useful in managing resource allocation and preventing unnecessary costs associated with idle machines.
 
-```sql
+```sql+postgres
+select
+  name,
+  id,
+  state,
+  region,
+  created_at
+from
+  fly_machine
+where
+  state = 'stopped';
+```
+
+```sql+sqlite
 select
   name,
   id,
@@ -46,7 +70,20 @@ where
 ### List machines by app
 Discover the segments that are associated with a specific application by analyzing the state, region, and creation date of each machine. This can be useful in managing resources and tracking the performance of different applications.
 
-```sql
+```sql+postgres
+select
+  name,
+  id,
+  state,
+  region,
+  created_at
+from
+  fly_machine
+where
+  app_id = 'fly-builder-icy-tree-3230';
+```
+
+```sql+sqlite
 select
   name,
   id,
@@ -62,7 +99,7 @@ where
 ### List unencrypted volumes attached to the machines
 Discover the segments that consist of machines with unencrypted volumes attached to them. This is beneficial for identifying potential security risks in your system.
 
-```sql
+```sql+postgres
 select
   m.name as machine,
   v.name as volume,
@@ -71,4 +108,15 @@ from
   fly_machine as m,
   jsonb_array_elements(config -> 'mounts') as mount
   join fly_volume as v on v.id = mount ->> 'volume' and not v.encrypted;
+```
+
+```sql+sqlite
+select
+  m.name as machine,
+  v.name as volume,
+  v.encrypted
+from
+  fly_machine as m,
+  json_each(m.config, '$.mounts') as mount
+  join fly_volume as v on v.id = json_extract(mount.value, '$.volume') and not v.encrypted;
 ```

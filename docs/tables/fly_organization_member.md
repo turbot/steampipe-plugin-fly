@@ -16,7 +16,18 @@ The `fly_organization_member` table provides insights into Organization Members 
 ### Basic info
 Explore which roles each member holds within your organization, gaining insights into the distribution of responsibilities and hierarchical structure. This can be particularly useful for assessing the elements within your team and identifying areas for growth or reorganization.
 
-```sql
+```sql+postgres
+select
+  name,
+  email,
+  username,
+  role,
+  organization_id
+from
+  fly_organization_member;
+```
+
+```sql+sqlite
 select
   name,
   email,
@@ -30,7 +41,20 @@ from
 ### List all admins in the organization
 Explore which members in your organization hold administrative roles. This helps in understanding the distribution of administrative privileges and aids in managing user permissions effectively.
 
-```sql
+```sql+postgres
+select
+  name,
+  email,
+  username,
+  role,
+  organization_id
+from
+  fly_organization_member
+where
+  role = 'ADMIN';
+```
+
+```sql+sqlite
 select
   name,
   email,
@@ -46,7 +70,7 @@ where
 ### List all members with two-factor authentication disabled
 Discover the members who have not enabled two-factor authentication. This is useful to identify potential security risks and ensure that all members are adhering to best practices for account protection.
 
-```sql
+```sql+postgres
 select
   name,
   email,
@@ -59,10 +83,36 @@ where
   not two_factor_protection;
 ```
 
+```sql+sqlite
+select
+  name,
+  email,
+  username,
+  role,
+  organization_id
+from
+  fly_organization_member
+where
+  two_factor_protection = 0;
+```
+
 ### List all members with restricted access
 Identify members within an organization who have restricted access, providing insights into user roles and permissions for better access management.
 
-```sql
+```sql+postgres
+select
+  name,
+  email,
+  username,
+  role,
+  organization_id
+from
+  fly_organization_member
+where
+  trust = 'RESTRICTED';
+```
+
+```sql+sqlite
 select
   name,
   email,

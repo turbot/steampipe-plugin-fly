@@ -16,7 +16,18 @@ The `fly_organization` table provides insights into organizations within Fly.io.
 ### Basic info
 Explore the basic details of your organization such as its name, unique identifier, type, and billing status. This information can be useful for administrative tasks or tracking billing activities.
 
-```sql
+```sql+postgres
+select
+  name,
+  id,
+  slug,
+  type,
+  billing_status
+from
+  fly_organization;
+```
+
+```sql+sqlite
 select
   name,
   id,
@@ -30,7 +41,7 @@ from
 ### List organizations with no payment method configured
 Uncover the details of organizations that have not configured a payment method. This is useful for financial auditing or ensuring all organizations in your network have a valid payment method in place.
 
-```sql
+```sql+postgres
 select
   name,
   id,
@@ -43,10 +54,35 @@ where
   not is_credit_card_saved;
 ```
 
+```sql+sqlite
+select
+  name,
+  id,
+  slug,
+  type,
+  billing_status
+from
+  fly_organization
+where
+  is_credit_card_saved = 0;
+```
+
 ### List organizations without SSH certificate
 Uncover the details of organizations that lack an SSH certificate, which may indicate a potential security vulnerability. This query is useful for identifying and addressing potential weak points in your organization's security infrastructure.
 
-```sql
+```sql+postgres
+select
+  name,
+  id,
+  slug,
+  type
+from
+  fly_organization
+where
+  ssh_certificate is null;
+```
+
+```sql+sqlite
 select
   name,
   id,

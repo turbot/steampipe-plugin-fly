@@ -16,7 +16,17 @@ The `fly_redis_database` table provides insights into Redis databases within Fly
 ### Basic info
 Explore which Redis databases are currently in use, along with their associated hostnames and public URLs. This can be useful in understanding the layout of your resources and identifying the primary region for each database.
 
-```sql
+```sql+postgres
+select
+  name,
+  hostname,
+  public_url,
+  primary_region
+from
+  fly_redis_database;
+```
+
+```sql+sqlite
 select
   name,
   hostname,
@@ -29,7 +39,7 @@ from
 ### List databases with no replica
 Discover the segments that consist of databases without replicas. This is useful for identifying potential single points of failure in your system and ensuring data redundancy.
 
-```sql
+```sql+postgres
 select
   name,
   hostname,
@@ -42,10 +52,23 @@ where
   or jsonb_array_length(read_regions) = 0;
 ```
 
+```sql+sqlite
+select
+  name,
+  hostname,
+  public_url,
+  primary_region
+from
+  fly_redis_database
+where
+  read_regions is null
+  or json_array_length(read_regions) = 0;
+```
+
 ### List databases with object eviction enabled
 Explore which Fly Redis databases have the object eviction feature enabled. This query is useful for identifying databases that may require additional memory management due to potential data loss.
 
-```sql
+```sql+postgres
 select
   name,
   hostname,
@@ -57,10 +80,22 @@ where
   (options -> 'eviction')::boolean;
 ```
 
+```sql+sqlite
+select
+  name,
+  hostname,
+  public_url,
+  primary_region
+from
+  fly_redis_database
+where
+  json_extract(options, '$.eviction') = 1;
+```
+
 ### List large databases
 Explore which databases are large, specifically those with a maximum data size of 3 GB. This can be useful for identifying databases that may require more storage or management due to their size.
 
-```sql
+```sql+postgres
 select
   name,
   hostname,
@@ -70,4 +105,16 @@ from
   fly_redis_database
 where
   add_on_plan ->> 'maxDataSize' = '3 GB';
+```
+
+```sql+sqlite
+select
+  name,
+  hostname,
+  public_url,
+  primary_region
+from
+  fly_redis_database
+where
+  json_extract(add_on_plan, '$.maxDataSize') = '3 GB';
 ```
