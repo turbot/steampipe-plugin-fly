@@ -1,15 +1,15 @@
 ---
-title: "Steampipe Table: fly_app - Query OCI Fly Apps using SQL"
+title: "Steampipe Table: fly_app - Query Fly Apps using SQL"
 description: "Allows users to query Fly Apps, specifically the app details, providing insights into app configurations and statuses."
 ---
 
-# Table: fly_app - Query OCI Fly Apps using SQL
+# Table: fly_app - Query Fly Apps using SQL
 
-Fly App is a resource within Oracle Cloud Infrastructure (OCI) that allows you to deploy and manage applications. It provides a platform for developers to build, deploy, and scale applications in a consistent manner. Fly App helps you manage the lifecycle of your applications, ensuring they are always up-to-date and running efficiently.
+Fly App is a resource within Fly.io that allows you to deploy and manage applications. It provides a platform for developers to build, deploy, and scale applications in a consistent manner. Fly App helps you manage the lifecycle of your applications, ensuring they are always up-to-date and running efficiently.
 
 ## Table Usage Guide
 
-The `fly_app` table provides insights into Fly Apps within Oracle Cloud Infrastructure (OCI). As a developer or a DevOps engineer, explore app-specific details through this table, including configurations, statuses, and associated metadata. Utilize it to uncover information about apps, such as their current status, configurations, and other crucial details that can help in managing and scaling applications efficiently.
+The `fly_app` table provides insights into Fly Apps. As a developer or a DevOps engineer, explore app-specific details through this table, including configurations, statuses, and associated metadata. Utilize it to uncover information about apps, such as their current status, configurations, and other crucial details that can help in managing and scaling applications efficiently.
 
 ## Examples
 
