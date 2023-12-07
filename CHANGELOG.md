@@ -1,3 +1,9 @@
+## v0.2.2 [2023-12-07]
+
+_Bug fixes_
+
+- Fixed the plugin to correctly return results when environment variables are only used for authentication. ([#21](https://github.com/turbot/steampipe-plugin-fly/pull/21))
+
 ## v0.2.1 [2023-10-05]
 
 _Dependencies_
