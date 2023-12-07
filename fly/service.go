@@ -33,13 +33,13 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error)
 		token = *flyConfig.ApiToken
 	}
 
-	// Return if no credential specified
+	// Return if no credential is specified
 	if token == "" {
 		return nil, fmt.Errorf("api_token must be configured")
 	}
 
 	// Start with an empty Fly config
-	config := flyapi.ClientConfig{ApiToken: flyConfig.ApiToken}
+	config := flyapi.ClientConfig{ApiToken: &token}
 
 	// Create the client
 	client, err := flyapi.CreateClient(ctx, config)
