@@ -84,7 +84,4 @@ The Fly plugin will use the standard Fly environment variables to obtain credent
 export FLY_API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
 ```
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-fly
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
