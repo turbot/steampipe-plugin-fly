@@ -8,6 +8,7 @@ short_name: "fly"
 description: "Steampipe plugin to query applications, volumes, databases, and more from your Fly organization."
 og_description: "Query Fly.io with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/fly-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Fly.io + Steampipe
