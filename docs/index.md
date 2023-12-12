@@ -8,13 +8,14 @@ short_name: "fly"
 description: "Steampipe plugin to query applications, volumes, databases, and more from your Fly organization."
 og_description: "Query Fly.io with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/turbot/fly-social-graphic.png"
+engines: ["steampipe", "sqlite", "postgres", "export"]
 ---
 
 # Fly.io + Steampipe
 
 [Fly.io](https://fly.io) provides a global application distribution platform where you can run your code in Firecracker microVMs worldwide.
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source zero-ETL engine to instantly query cloud APIs using SQL.
 
 List all apps deployed in your organization:
 
@@ -83,7 +84,4 @@ The Fly plugin will use the standard Fly environment variables to obtain credent
 export FLY_API_TOKEN=97GtVsdAPwowRToaWDtgZtILdXI_agszONwajQslZ1o
 ```
 
-## Get involved
 
-- Open source: https://github.com/turbot/steampipe-plugin-fly
-- Community: [Join #steampipe on Slack →](https://turbot.com/community/join)
