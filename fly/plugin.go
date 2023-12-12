@@ -17,7 +17,6 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		Name: pluginName,
 		ConnectionConfigSchema: &plugin.ConnectionConfigSchema{
 			NewInstance: ConfigInstance,
-			Schema:      ConfigSchema,
 		},
 		DefaultGetConfig: &plugin.GetConfig{
 			ShouldIgnoreError: errors.NotFoundError,
