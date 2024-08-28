@@ -1,13 +1,13 @@
 module github.com/turbot/steampipe-plugin-fly
 
-go 1.21.0
+go 1.22.4
 
-toolchain go1.21.1
+toolchain go1.22.6
 
 require (
 	github.com/Khan/genqlient v0.5.0
 	github.com/fly-apps/terraform-provider-fly v0.0.20
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.3
 )
 
 require (
