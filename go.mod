@@ -7,7 +7,7 @@ toolchain go1.23.2
 require (
 	github.com/Khan/genqlient v0.5.0
 	github.com/fly-apps/terraform-provider-fly v0.0.20
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.6
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.11.7
 )
 
 require (
