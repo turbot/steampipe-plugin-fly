@@ -1,7 +1,7 @@
 package fly
 
 import (
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 )
 
 type flyConfig struct {
@@ -14,9 +14,9 @@ func ConfigInstance() interface{} {
 
 // GetConfig :: retrieve and cast connection config from query data
 func GetConfig(connection *plugin.Connection) flyConfig {
-	if connection == nil || connection.Config == nil {
+	if connection == nil || connection.GetConfig() == nil {
 		return flyConfig{}
 	}
-	config, _ := connection.Config.(flyConfig)
+	config, _ := connection.GetConfig().(flyConfig)
 	return config
 }

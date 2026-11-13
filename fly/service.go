@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v6/plugin"
 
 	"github.com/turbot/steampipe-plugin-fly/flyapi"
 )
@@ -14,7 +14,7 @@ import (
 func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error) {
 	// Load connection from cache, which preserves throttling protection etc
 	cacheKey := "fly"
-	if cachedData, ok := d.ConnectionManager.Cache.Get(cacheKey); ok {
+	if cachedData, ok := d.ConnectionCache.Get(ctx, cacheKey); ok {
 		return cachedData.(*flyapi.Client), nil
 	}
 
@@ -48,7 +48,7 @@ func getClient(ctx context.Context, d *plugin.QueryData) (*flyapi.Client, error)
 	}
 
 	// Save to cache
-	d.ConnectionManager.Cache.Set(cacheKey, client)
+	_ = d.ConnectionCache.Set(ctx, cacheKey, client)
 
 	return client, nil
 }
